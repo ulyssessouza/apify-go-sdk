@@ -10,12 +10,13 @@ import (
 
 type Actor struct{}
 
-func (a *Actor) GetInput() ([]byte, error) {
-	kvStoreId, ok := a.GetDefaultKeyValueStoreId()
+func GetInput() ([]byte, error) {
+	actor := &Actor{}
+	kvStoreId, ok := actor.GetDefaultKeyValueStoreId()
 	if !ok {
 		return nil, _E("could not get default key/value store ID")
 	}
-	inputKey, ok := a.GetInputKey()
+	inputKey, ok := actor.GetInputKey()
 	if !ok {
 		return nil, _E("could not get input key")
 	}
@@ -28,13 +29,14 @@ func (a *Actor) GetInput() ([]byte, error) {
 	return io.ReadAll(resp.Body)
 }
 
-func (a *Actor) SetOutput(output string) (string, error) {
+func SetOutput(output string) (string, error) {
 	apify := &Apify{}
+	actor := &Actor{}
 	token, ok := apify.GetToken()
 	if !ok {
 		return "", _E("could not get token from environment")
 	}
-	kvStoreId, ok := a.GetDefaultKeyValueStoreId()
+	kvStoreId, ok := actor.GetDefaultKeyValueStoreId()
 	if !ok {
 		return "", _E("could not get default key/value store ID")
 	}
