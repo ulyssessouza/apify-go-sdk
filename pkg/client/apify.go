@@ -4,8 +4,6 @@ import (
 	"os"
 )
 
-const kvUrlFormat = "https://api.apify.com/v2/key-value-stores/%s/records/%s"
-
 type Apify struct{}
 
 func (a *Apify) GetOutputKvKey() string {
